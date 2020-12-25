@@ -17,4 +17,17 @@ class Store extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function getStatusAttribute()
+    {
+        return ($this->approved) ? 'Approved' : 'Not Approved';
+    }
+
+    public function getStatusColorAttribute()
+    {
+        return ($this->approved) ? 'bg-green-100 text-green-800': 'bg-red-100 text-red-800';
+    }
+
+
+
 }

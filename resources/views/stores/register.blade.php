@@ -6,7 +6,7 @@
 
         <x-jet-validation-errors class="mb-4" />
 
-        <form method="POST" action="{{ route('store.create') }}" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('stores.create') }}" enctype="multipart/form-data">
             @csrf
 
             <div>

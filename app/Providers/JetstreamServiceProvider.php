@@ -37,16 +37,21 @@ class JetstreamServiceProvider extends ServiceProvider
         Fortify::authenticateUsing(function (Request $request) {
             $user = User::where('email', $request->email)->first();
 
+            //check their information
+            //Check if they are in admin
+            // admin = let them in
+            // not admin = check if their store has been approved
 
 
+            //check their information is correct
+            if ( $user &&  Hash::check($request->password, $user->password)  ) {
 
-            if (
-                $user &&
-                Hash::check($request->password, $user->password)
-                &&
-                $user->store->approved == true
-            ) {
-                return $user;
+                //check if they are in admin
+                if($user->hasRole('admin')){
+                    return $user;
+                } elseif($user->hasRole('customer') && $user->store->approved){
+                    return $user;
+                }
             }
         });
     }

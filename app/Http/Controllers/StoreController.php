@@ -12,6 +12,15 @@ class StoreController extends Controller
 {
     use PasswordValidationRules;
 
+
+
+    public function index() {
+
+        return view('stores.index');
+    }
+
+
+
     public function register()
     {
         return view('stores.register');
@@ -38,6 +47,9 @@ class StoreController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
+
+        //Assign in the role
+        $user->assignRole('customer');
 
 
         //Store the license
