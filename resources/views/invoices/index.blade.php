@@ -7,7 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-           @livewire('invoices.create-invoice')
+            @if (auth()->user()->hasRole('customer'))
+                 @livewire('invoices.create-invoice')
+            @endif
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
                 @livewire('invoices.invoice-table')
             </div>

@@ -16,7 +16,7 @@ class InvoiceTable extends Component
 
     public function getInvoicesProperty()
     {
-        //admin = all voices
+        //admin = all invoices
         // customers = their invoices
 
         if (auth()->user()->hasRole('admin')) {
