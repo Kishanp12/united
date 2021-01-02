@@ -15,7 +15,32 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
-        Product::factory()->times(20)->create();
+
+        $handle = fopen(storage_path('app/products/products.csv'), "r");
+        $header = true;
+
+        $products = [];
+
+        while ($csvLine = fgetcsv($handle, 1000, ",")) {
+
+            //ignore the headers
+            if ($header) {
+                $header = false;
+            } else {
+                //Create a product
+                $products[] = [
+                    'name' => $csvLine[0],
+                    'brand' => $csvLine[1],
+                    'category' => $csvLine[2],
+                    'price' => 1.00,
+                    'created_at' => now(),
+                    'updated_at' => now()
+                ];
+            }
+        }
+
+        //Now the save products
+        Product::insert($products);
 
     }
 }

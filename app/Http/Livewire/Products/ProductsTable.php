@@ -34,7 +34,9 @@ class ProductsTable extends LivewireDatatable
 
         $col = [
              NumberColumn::name('id'),
-             Column::name('name')->filterable()->searchable()
+             Column::name('name')->filterable()->searchable(),
+             Column::name('brand')->filterable()->searchable(),
+             Column::name('category')->filterable()->searchable(),
         ];
 
         if ($this->invoice->status == 0) {
@@ -45,16 +47,5 @@ class ProductsTable extends LivewireDatatable
         }
 
         return $col;
-
-
-        // return [
-        //     NumberColumn::name('id'),
-
-        //     Column::name('name')->filterable()->searchable(),
-
-        //     Column::callback(['id', 'price'], function ($id, $price) {
-        //         return view('products.table-actions', ['id' => $id, 'price' => $price]);
-        //     })
-        // ];
     }
 }
